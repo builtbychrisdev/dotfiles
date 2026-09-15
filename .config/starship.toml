@@ -1,0 +1,35 @@
+add_newline = false
+palette = "gruvbox"
+
+format = """
+$directory$git_branch$git_status$cmd_duration
+$character"""
+
+[character]
+success_symbol = "[](bold yellow)"
+error_symbol = "[](bold red)"
+
+[directory]
+style = "bold aqua"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+style = "bold orange"
+
+[cmd_duration]
+min_time = 2000
+style = "bold gray"
+format = "[ $duration]($style)"
+
+[palettes.gruvbox]
+yellow = "#fabd2f"
+red = "#fb4934"
+aqua = "#8ec07c"
+purple = "#d3869b"
+orange = "#fe8019"
+gray = "#928374"

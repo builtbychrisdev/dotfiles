@@ -1,0 +1,121 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "spacing": 6,
+  "margin-top": 6,
+  "margin-left": 8,
+  "margin-right": 8,
+
+  "modules-left": ["hyprland/workspaces", "hyprland/submap", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "idle_inhibitor", "wireplumber", "cpu", "memory",
+    "temperature", "network", "tray", "custom/power"
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "all-outputs": true,
+    "show-special": true,
+    "persistent-workspaces": { "*": [1, 2, 3, 4, 5] },
+    "format-icons": {
+      "active":  "●",
+      "default": "○",
+      "empty":   "·",
+      "special": "◆",
+      "magic":   "◆"
+    }
+  },
+
+  "hyprland/submap": {
+    "format": "[{}]",
+    "tooltip": false
+  },
+
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 60,
+    "separate-outputs": true,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "$1",
+      "(.*) - NVIM": "$1"
+    }
+  },
+
+  "clock": {
+    "interval": 60,
+    "format": "{:%a %d %b  %H:%M}",
+    "format-alt": "{:%H:%M:%S   %Y-%m-%d}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "on-scroll": 1,
+      "format": {
+        "months":   "<span color='#fabd2f'><b>{}</b></span>",
+        "days":     "<span color='#ebdbb2'>{}</span>",
+        "weekdays": "<span color='#83a598'><b>{}</b></span>",
+        "today":    "<span color='#fb4934'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": { "activated": "◉", "deactivated": "○" },
+    "tooltip-format-activated": "Idle inhibited — screen stays on",
+    "tooltip-format-deactivated": "Idle normal"
+  },
+
+  "wireplumber": {
+    "format": "♪ {volume}%",
+    "format-muted": "♪ mute",
+    "scroll-step": 5,
+    "max-volume": 150,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "tooltip-format": "{node_name}"
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": "▣ {usage}%",
+    "on-click": "kitty btop"
+  },
+
+  "memory": {
+    "interval": 10,
+    "format": "▤ {percentage}%",
+    "tooltip-format": "{used:0.1f}G / {total:0.1f}G"
+  },
+
+  "temperature": {
+    "interval": 5,
+    "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+    "critical-threshold": 85,
+    "format": "{temperatureC}°C",
+    "format-critical": "{temperatureC}°C !"
+  },
+
+  "network": {
+    "interval": 5,
+    "format-ethernet": "⇅ {bandwidthDownBytes} / {bandwidthUpBytes}",
+    "format-disconnected": "⇅ offline",
+    "tooltip-format": "{ifname}   {ipaddr}/{cidr}"
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "tooltip-format": "power menu",
+    "on-click": "wlogout -p layer-shell -b 3 -T 420 -B 420 -L 780 -R 780 -s"
+  }
+}

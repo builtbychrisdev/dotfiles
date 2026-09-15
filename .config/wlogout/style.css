@@ -1,0 +1,47 @@
+* {
+    background-image: none;
+    box-shadow: none;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 16px;
+    font-weight: 600;
+}
+
+window {
+    background-color: rgba(29, 32, 33, 0.80);
+}
+
+button {
+    color: #ebdbb2;
+    background-color: #282828;
+    border: 2px solid #3c3836;
+    border-radius: 16px;
+    margin: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    transition: all 0.2s ease-in-out;
+}
+
+button:focus,
+button:active,
+button:hover {
+    background-color: #3c3836;
+    border-color: #fabd2f;
+    color: #fabd2f;
+    outline-style: none;
+}
+
+#shutdown:focus,
+#shutdown:active,
+#shutdown:hover { border-color: #fb4934; color: #fb4934; }
+
+#reboot:focus,
+#reboot:active,
+#reboot:hover   { border-color: #fe8019; color: #fe8019; }
+
+#lock     { background-image: url("/usr/share/wlogout/assets/lock.svg"); }
+#logout   { background-image: url("/usr/share/wlogout/assets/logout.svg"); }
+#suspend  { background-image: url("/usr/share/wlogout/assets/suspend.svg"); }
+#reboot   { background-image: url("/usr/share/wlogout/assets/reboot.svg"); }
+#shutdown { background-image: url("/usr/share/wlogout/assets/shutdown.svg"); }
+#hibernate { background-image: url("/usr/share/wlogout/assets/hibernate.svg"); }

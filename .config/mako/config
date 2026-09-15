@@ -1,0 +1,40 @@
+font=JetBrainsMono Nerd Font 11
+background-color=#1d2021e6
+text-color=#ebdbb2
+border-color=#fabd2f
+progress-color=over #504945
+
+width=380
+height=160
+margin=10
+padding=14
+border-size=2
+border-radius=10
+
+# check the real dir name with: ls /usr/share/icons
+# icon-path=/usr/share/icons/Gruvbox-Plus-Dark
+max-icon-size=48
+icon-location=left
+
+default-timeout=6000
+ignore-timeout=0
+layer=overlay
+anchor=top-right
+max-visible=5
+group-by=app-name
+markup=1
+actions=1
+format=<b>%s</b>\n%b
+
+[urgency=low]
+border-color=#928374
+text-color=#a89984
+default-timeout=4000
+
+[urgency=high]
+border-color=#fb4934
+text-color=#fb4934
+default-timeout=0
+
+[mode=do-not-disturb]
+invisible=1
