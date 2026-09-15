@@ -223,9 +223,8 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Workspaces:
 for i = 1, 5 do
-    local key = i % 5
-    hl.bind(mainMod .. " + " .. key,	     hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+    hl.bind(mainMod .. " + " .. i,         hl.dsp.focus({ workspace = i }))
+    hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
 
 -- Scratchpad:

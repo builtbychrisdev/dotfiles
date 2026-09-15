@@ -17,14 +17,11 @@
   "hyprland/workspaces": {
     "format": "{icon}",
     "all-outputs": true,
-    "show-special": true,
     "persistent-workspaces": { "*": [1, 2, 3, 4, 5] },
     "format-icons": {
       "active":  "●",
       "default": "○",
       "empty":   "·",
-      "special": "◆",
-      "magic":   "◆"
     }
   },
 
