@@ -1,0 +1,12 @@
+[sie][Gate#0]
+attack=5
+curveThreshold=-45
+hpfFrequency=100
+hpfMode=1
+hysteresis=true
+lpfFrequency=8000
+lpfMode=1
+reduction=-12
+release=250
+sidechainLookahead=5
+sidechainMode=1

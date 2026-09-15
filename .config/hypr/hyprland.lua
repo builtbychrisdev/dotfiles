@@ -47,6 +47,7 @@ local browser	  = "librewolf"
 
 hl.on("hyprland.start", function()
    hl.exec_cmd("systemctl --user start hyprpolkitagent")
+   hl.exec_cmd("easyeffects --gapplication-service")
    hl.exec_cmd("waybar")
    hl.exec_cmd("mako")
    hl.exec_cmd("hyprpaper")
@@ -239,8 +240,10 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), {mouse = true})
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), {mouse = true})
 
--- Region Screenshot To Clipboard:
-hl.bind("PRINT", hl.dsp.exec_cmd([[bash -c 'grim -g "$(slurp)" - | wl-copy]]))
+-- Screenshots:
+hl.bind("Print",                hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy]]))
+hl.bind("SHIFT + Print",        hl.dsp.exec_cmd([[grim - | wl-copy]]))
+hl.bind(mainMod .. " + Print",  hl.dsp.exec_cmd([[mkdir -p "$HOME/Pictures/Screenshots" && grim -g "$(slurp)" - | tee "$HOME/Pictures/Screenshots/shot-$(date +%Y%m%d-%H%M%S).png" | wl-copy]]))
 
 -- Volume:
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -1 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true})
