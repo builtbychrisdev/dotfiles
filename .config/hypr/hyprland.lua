@@ -30,6 +30,7 @@ hl.monitor({
     mode     = "2560x1440@165",
     position = "auto",
     scale    = "1",
+    vrr = 1,
 })
 
 ---------------------
@@ -75,7 +76,6 @@ hl.config({
     general = {
         gaps_in  = 4,
         gaps_out = 8,
-
         border_size = 2,
 
         col = {
@@ -192,6 +192,12 @@ hl.config({
         follow_mouse = 1,
         sensitivity = 0,
     },
+})
+
+hl.config({
+  cursor = {
+    no_hardware_cursors = true,
+  },
 })
 
 ---------------------
