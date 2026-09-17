@@ -160,10 +160,3 @@ System files, copy them manually:
 
 **Never commit `~/.config/gh/hosts.yml`** — github-cli stores the OAuth token
 there in plain text.
-
-## TODO
-
-- [ ] `local browser` in `hyprland.lua` still says `firefox`, should be `librewolf`
-- [ ] waybar window-title rewrite rule still strips `— Mozilla Firefox`
-- [ ] Qt6 theming (kvantum + qt6ct) for Prism Launcher and EasyEffects
-- [ ] `random-wall.sh` still uses the old preload API, needs the IPC version
