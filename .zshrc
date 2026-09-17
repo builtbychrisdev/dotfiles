@@ -35,3 +35,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#665c54'
 
 # ── prompt ────────────────────────────────────────────────
 eval "$(starship init zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/chris/.lmstudio/bin"
+# End of LM Studio CLI section
+

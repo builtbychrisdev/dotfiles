@@ -234,10 +234,6 @@ for i = 1, 5 do
     hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
 
--- Scratchpad:
-hl.bind(mainMod .. " + S", 	   hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
-
 -- Scroll Through Workspaces:
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
@@ -247,7 +243,7 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), {mouse = true})
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), {mouse = true})
 
 -- Screenshots:
-hl.bind("Print",                hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy]]))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy]]))
 hl.bind("SHIFT + Print",        hl.dsp.exec_cmd([[grim - | wl-copy]]))
 hl.bind(mainMod .. " + Print",  hl.dsp.exec_cmd([[mkdir -p "$HOME/Pictures/Screenshots" && grim -g "$(slurp)" - | tee "$HOME/Pictures/Screenshots/shot-$(date +%Y%m%d-%H%M%S).png" | wl-copy]]))
 
