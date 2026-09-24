@@ -1,0 +1,233 @@
+// ~/.config/niri/config.kdl
+// DMS includes go FIRST so everything you set below overrides them.
+
+include "dms/input.kdl"
+include "dms/windowrules.kdl"
+include "dms/cursor.kdl"
+include "dms/layout.kdl"
+include "dms/outputs.kdl"
+include "dms/binds.kdl"
+
+input {
+    keyboard {
+        xkb {
+        }
+        numlock
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+    }
+
+    mouse {
+    }
+
+    trackpoint {
+    }
+}
+
+// Recommended by DMS so Qt/Electron apps behave and follow your GTK theme.
+environment {
+    XDG_CURRENT_DESKTOP "niri"
+    QT_QPA_PLATFORM "wayland"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+}
+
+// No client-side title bars. Apps that agree get niri's own border instead.
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// waybar removed - DMS is your bar now.
+// Clipboard history backend for DMS's clipboard manager (Mod+V).
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+
+layout {
+    gaps 12
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    // gruvbox
+    focus-ring {
+        width 3
+        active-color "#fabd2f"
+        inactive-color "#504945"
+    }
+
+    border {
+        off
+        width 3
+        active-color "#fabd2f"
+        inactive-color "#504945"
+        urgent-color "#fb4934"
+    }
+
+    shadow {
+        on
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#1d2021aa"
+    }
+
+    struts {
+    }
+}
+
+animations {
+}
+
+// ---------- looks ----------
+
+// Rounded corners + blur behind transparent windows (niri 26.04+).
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+
+    background-effect {
+        xray true
+        blur true
+        noise 0.02
+        saturation 1.15
+    }
+}
+
+// Transparency, otherwise you'll never see the blur.
+window-rule {
+    match app-id=r#"^Alacritty$"#
+    match app-id=r#"^org\.gnome\.Ptyxis$"#
+    opacity 0.92
+}
+
+window-rule {
+    match app-id=r#"librewolf"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// Blur behind the DMS panels themselves.
+// If nothing changes, check the real namespace with: niri msg layers
+layer-rule {
+    match namespace="^quickshell$"
+
+    background-effect {
+        blur true
+        noise 0.02
+    }
+}
+
+// ---------- binds ----------
+// DMS includes are at the top, so everything here overrides DMS defaults.
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // ---------- apps ----------
+    Mod+Return hotkey-overlay-title="Terminal" { spawn "alacritty"; }
+    Mod+B      hotkey-overlay-title="Browser: LibreWolf" { spawn "librewolf"; }
+    Mod+F      hotkey-overlay-title="File manager" { spawn "nautilus"; }
+    Mod+D      hotkey-overlay-title="Launcher" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+C      hotkey-overlay-title="Clipboard history" { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+
+    // ---------- window ----------
+    Mod+Q       repeat=false hotkey-overlay-title="Close window" { close-window; }
+    Mod+V       hotkey-overlay-title="Toggle floating" { toggle-window-floating; }
+    Mod+Shift+F hotkey-overlay-title="Fullscreen" { fullscreen-window; }
+    Mod+J       hotkey-overlay-title="Pull window into column" { consume-or-expel-window-right; }
+    Mod+S       hotkey-overlay-title="Floating <-> tiling" { switch-focus-between-floating-and-tiling; }
+    Mod+Tab     hotkey-overlay-title="Overview" { toggle-overview; }
+
+    // ---------- system ----------
+    Mod+W       hotkey-overlay-title="Next wallpaper" { spawn "dms" "ipc" "call" "wallpaper" "next"; }
+    Mod+L       hotkey-overlay-title="Lock" { spawn "dms" "ipc" "call" "lock"; }
+    Mod+N       hotkey-overlay-title="Do not disturb" { spawn "dms" "ipc" "call" "notifications" "toggleDoNotDisturb"; }
+    Mod+Shift+N hotkey-overlay-title="Notification centre" { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+    Mod+X       hotkey-overlay-title="Control centre" { spawn "dms" "ipc" "call" "control-center" "toggle"; }
+    Mod+Escape  hotkey-overlay-title="Power menu" { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Mod+Shift+M hotkey-overlay-title="Exit niri" { quit; }
+
+    // ---------- focus (arrows, since Mod+J and Mod+L are yours) ----------
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up    { focus-window-up; }
+    Mod+Down  { focus-window-down; }
+    Mod+H     { focus-column-left; }
+    Mod+K     { focus-window-up; }
+
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Up    { move-window-up; }
+    Mod+Shift+Down  { move-window-down; }
+
+    Mod+Home { focus-column-first; }
+    Mod+End  { focus-column-last; }
+
+    Mod+Ctrl+Left  { focus-monitor-left; }
+    Mod+Ctrl+Right { focus-monitor-right; }
+    Mod+Ctrl+Up    { focus-monitor-up; }
+    Mod+Ctrl+Down  { focus-monitor-down; }
+
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+
+    // ---------- workspaces ----------
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+Page_Down { focus-workspace-down; }
+    Mod+Page_Up   { focus-workspace-up; }
+    Mod+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up   { move-column-to-workspace-up; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
+
+    // ---------- sizing ----------
+    Mod+R           { switch-preset-column-width; }
+    Mod+Shift+R     { switch-preset-window-height; }
+    Mod+Ctrl+F      { maximize-column; }
+    Mod+Ctrl+C      { center-column; }
+    Mod+Minus       { set-column-width "-10%"; }
+    Mod+Equal       { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // ---------- screenshots ----------
+    Print      { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print  { screenshot-window; }
+
+    // ---------- media ----------
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+}
