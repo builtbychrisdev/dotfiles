@@ -1,4 +1,4 @@
-# System Setup — Ubuntu 26.04
+# My .dotfiles — Ubuntu 26.04
 
 Reinstall and recovery notes for my desktop and laptop. Config files live in
 the dotfiles repo; this file covers everything that isn't a file — repos,
